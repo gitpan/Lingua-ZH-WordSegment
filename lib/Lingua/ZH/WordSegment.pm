@@ -13,7 +13,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 ) ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(seg seg_STDIO set_dic);
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 my %wordFreqList=();				#Chinese word as key of the hash table, frequency is the value
 my %longestWordListStart=();		#Chinese character as key in the hash table, length of the longest word starting with
@@ -287,13 +287,13 @@ September 21, 2006.
 
 =head1 SYNOPSIS
 
-    use Lingua::ZH::WordSegment;
-    print seg('中华文化源远流长');	
+	use Lingua::ZH::WordSegment;
+	print seg($str_in);
 	seg_STDIO();# Read from STDIN, and print the segmented result to STDOUT
 
-	set_dic("$dictionary_file"); #load word from the file, this is not a must
-
-	perl -MLingua::ZH::WordSegment -e "seg_STDIO();" < input_file > output_file
+	set_dic($dictionary_file_name); #load word from the file, this is not a must
+	perl -MLingua::ZH::WordSegment -e 'seg_STDIO();' < input_file > output_file
+	
 =head1 DESCRIPTION
 
 This code is mainly written by Joy, joy@cs.cmu.edu in July 4th, 2001.
@@ -316,13 +316,14 @@ The above is Joy's original declarations.
 =head1 METHODS
 
 	seg($str_in);# return the string of segmentation result.
-	seg_STDIO();# Read from STDIN, and print the segmented result to STDOUT
+	seg_STDIO();	# Read from STDIN, and print the segmented result to STDOUT
 	
 	set_dic($dictionary_file_name)
 	#The format of the dictionary file for each line is: 
 	# "chineseWord\tFrequency\n"
 	# 
-	#Notice that if you don't call set_dic, the default dictionary will be load
+	#Notice that if you don't call set_dic, 
+	#the default dictionary in GBK encoding will be loaded.
 	#The default dictionary is extracted from corpus of the People's Daily, 
 	#January, 1998. 
 	#Thanks to Institute of Computational Linguistics, Peking University,China.

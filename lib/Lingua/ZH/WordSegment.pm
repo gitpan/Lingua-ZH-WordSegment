@@ -13,7 +13,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 ) ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(seg seg_STDIO set_dic);
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 my %wordFreqList=();				#Chinese word as key of the hash table, frequency is the value
 my %longestWordListStart=();		#Chinese character as key in the hash table, length of the longest word starting with
@@ -220,13 +220,13 @@ sub segmentZhStr{		#segmenting a string of Chinese characters, there should be n
 	#from right to left
 	#---------------------------------
 	my $rightToLeftFreq=0;
-	$thisCharIndex=$lenOfString-1;
+	$thisCharIndex=$lenOfString-1;D:\chenyr_work\ForMyself\CPAN\FMMWordSegmentor
 
 	while($thisCharIndex>=0){
 		my $startCharIndex=0;
 		my $found=0;
 		while((!$found)&&($startCharIndex<=$thisCharIndex)){
-			if($arcTable[$startCharIndex][$thisCharIndex]!=-1){
+			if($arcTable[$startCharIndex][$thisCharIndex]!=-1){D:\chenyr_work\ForMyself\CPAN\FMMWordSegmentor
 				$found=1;
 				$rightToLeftFreq+=log($arcTable[$startCharIndex][$thisCharIndex]);
 			}
@@ -280,11 +280,6 @@ set_dic();
 
 Lingua::ZH::WordSegment - Simple Simplified Chinese Word Segmentation
 
-=head1 VERSION
-
-This document describes version 0.01 of Lingua::ZH::WordSegment, released
-September 21, 2006.
-
 =head1 SYNOPSIS
 
 	use Lingua::ZH::WordSegment;
@@ -315,7 +310,7 @@ The above is Joy's original declarations.
 
 =head1 METHODS
 
-	seg($str_in);# return the string of segmentation result.
+	seg($str_in);	# return the string of segmentation result.
 	seg_STDIO();	# Read from STDIN, and print the segmented result to STDOUT
 	
 	set_dic($dictionary_file_name)
@@ -333,7 +328,7 @@ The above is Joy's original declarations.
 
 =head1 AUTHORS
 
-Rewrited by Chen Yirong E<lt>cyr.master@gmail.com<gt> ,September 21, 2006
+Rewrited by Chen Yirong E<lt>cyr.master@gmail.com<gt>, September 21, 2006
 Original Author: 
 	Joy, joy@cs.cmu.edu in July 4th, 2001
 	

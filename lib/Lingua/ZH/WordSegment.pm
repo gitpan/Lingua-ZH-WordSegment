@@ -13,7 +13,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 ) ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(seg seg_STDIO set_dic);
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 my %wordFreqList=();				#Chinese word as key of the hash table, frequency is the value
 my %longestWordListStart=();		#Chinese character as key in the hash table, length of the longest word starting with
@@ -220,13 +220,13 @@ sub segmentZhStr{		#segmenting a string of Chinese characters, there should be n
 	#from right to left
 	#---------------------------------
 	my $rightToLeftFreq=0;
-	$thisCharIndex=$lenOfString-1;D:\chenyr_work\ForMyself\CPAN\FMMWordSegmentor
+	$thisCharIndex=$lenOfString-1;
 
 	while($thisCharIndex>=0){
 		my $startCharIndex=0;
 		my $found=0;
 		while((!$found)&&($startCharIndex<=$thisCharIndex)){
-			if($arcTable[$startCharIndex][$thisCharIndex]!=-1){D:\chenyr_work\ForMyself\CPAN\FMMWordSegmentor
+			if($arcTable[$startCharIndex][$thisCharIndex]!=-1){
 				$found=1;
 				$rightToLeftFreq+=log($arcTable[$startCharIndex][$thisCharIndex]);
 			}
@@ -245,7 +245,7 @@ sub segmentZhStr{		#segmenting a string of Chinese characters, there should be n
 
 	#---------------------------------------------------------------------------------
 	# Step3: create result
-	if($leftToRightFreq>$rightToLeftFreq){			#using left to right solution, prefer right to left
+	if($leftToRightFreq>$rightToLeftFreq){#using left to right solution, prefer right to left
 		for(my $p=0;$p<$lenOfString;$p++){
 			$result=$result.substr($inputString, $p*2, 2);
 
@@ -275,6 +275,7 @@ sub segmentZhStr{		#segmenting a string of Chinese characters, there should be n
 set_dic();
 1;
 
+=pod
 
 =head1 NAME
 
@@ -290,6 +291,8 @@ Lingua::ZH::WordSegment - Simple Simplified Chinese Word Segmentation
 	perl -MLingua::ZH::WordSegment -e 'seg_STDIO();' < input_file > output_file
 	
 =head1 DESCRIPTION
+
+The default word list is extracted from People's Daily in Jan, 1998 owned by Institute of Computational Linguistics, Peking University, China
 
 This code is mainly written by Joy, joy@cs.cmu.edu in July 4th, 2001.
 
@@ -328,7 +331,7 @@ The above is Joy's original declarations.
 
 =head1 AUTHORS
 
-Rewrited by Chen Yirong E<lt>cyr.master@gmail.com<gt>, September 21, 2006
+Rewrited by Chen Yirong E<lt> cyr.master@gmail.com E<gt>, September 21, 2006 and modified in Feb 20, 2007.
 Original Author: 
 	Joy, joy@cs.cmu.edu in July 4th, 2001
 	
